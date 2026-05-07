@@ -27,7 +27,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div class="card" on:click={() => dispatch('play')} role="button" tabindex="0"
-  on:keydown={(e) => e.key === 'Enter' && dispatch('play')}>
+  on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && dispatch('play')}>
 
   <div class="thumb">
     <svg viewBox="0 0 64 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

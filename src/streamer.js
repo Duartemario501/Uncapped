@@ -203,8 +203,10 @@ export class Streamer extends EventTarget {
         chunk,
       );
 
-      // Throttle slightly to avoid overflowing the DataChannel buffer.
       node.send(toPeerID, packet);
+      // Yield to the event loop between chunks to avoid overflowing the
+      // DataChannel's internal buffer; 4 ms is enough to let the browser
+      // drain pending sends without stalling the stream noticeably.
       await new Promise((r) => setTimeout(r, 4));
     }
 

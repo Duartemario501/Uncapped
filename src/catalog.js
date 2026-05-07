@@ -33,7 +33,7 @@ const OFFLINE_THRESHOLD_MS  = 60_000;  // 60 s
  */
 export async function fingerprintFile(file) {
   const SAMPLE = 10 * 1024 * 1024; // 10 MB
-  const slice  = file.slice(0, SAMPLE);
+  const slice  = file.slice(0, Math.min(SAMPLE, file.size));
   const buf    = await slice.arrayBuffer();
   const digest = await crypto.subtle.digest('SHA-256', buf);
   return Array.from(new Uint8Array(digest))
